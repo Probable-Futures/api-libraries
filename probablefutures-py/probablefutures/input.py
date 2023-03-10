@@ -33,6 +33,7 @@ def build_query(input_fields={}, output_fields=[]):
 
 @dataclass
 class Input:
+    """This class is not yet used in the API."""
 
     lon: str
     lat: str

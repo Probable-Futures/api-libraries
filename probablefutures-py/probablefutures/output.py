@@ -2,7 +2,8 @@ from dataclasses import dataclass
 
 
 @dataclass
-class Input:
+class Output:
+    """This class is not yet used in the API."""
 
     datasetId: int
     highValue: float
