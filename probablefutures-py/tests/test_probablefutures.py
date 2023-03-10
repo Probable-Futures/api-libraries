@@ -52,8 +52,8 @@ class TestProbableFutures(unittest.TestCase):
         request = """mutation {      
             getDatasetStatistics(
                 input: {
-                    lon: "-73.9", 
-                    lat: "40.7", 
+                    longitude: -73.9, 
+                    latitude: 40.7, 
                     country: "US",
                     warmingScenario: "1.0", 
                     datasetId: 40104
@@ -78,8 +78,8 @@ class TestProbableFutures(unittest.TestCase):
         self.assertIsNotNone(response_json['data'])
 
         input_fields = {
-            "lon": "-73.9",
-            "lat": "40.7",
+            "longitude": -73.90,
+            "latitude": 40.7,
             "warmingScenario": "1.0",
             "datasetId": 40104
         }
