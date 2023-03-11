@@ -1,6 +1,10 @@
+import dataclasses
 import os
 import unittest
-from probablefutures.probablefutures import ProbableFutures
+
+from probablefutures import probablefutures
+from probablefutures import ProbableFutures
+from probablefutures import Request
 
 
 class TestProbableFutures(unittest.TestCase):
@@ -88,6 +92,42 @@ class TestProbableFutures(unittest.TestCase):
         response_json = response.json()
         print(response_json)
         self.assertEqual(response.status_code, 200)
+
+
+    def test_request2(self):
+        input_fields = {
+            "longitude": -73.90,
+            "latitude": 40.7,
+            "warmingScenario": "1.0",
+            "datasetId": 40104
+        }
+        output_fields = ["datasetId", "highValue", "lowValue", "midValue", "name", "unit", "warmingScenario"]
+        print(probablefutures.build_query(input_fields=input_fields, output_fields=output_fields))
+
+    def test_request3(self):
+        request = Request()
+        request.longitude = -73.90
+        request.warmingScenario = "1.0"
+        request.datasetId = 40104
+        request.output_fields = ["datasetId", "highValue", "lowValue", "midValue", "name", "unit", "warmingScenario"]
+        print(request)
+        print(dataclasses.asdict(request))
+        print(request.build_query())
+        print(isinstance(request, Request))
+
+    def test_request4(self):
+        request = Request()
+        request.longitude = -73.90
+        request.warmingScenario = "1.0"
+        request.datasetId = 40104
+        request.output_fields = ["datasetId", "highValue", "lowValue", "midValue", "name", "unit", "warmingScenario"]
+        pf = ProbableFutures(self._user, password=self._password)
+        pf.connect()
+        response = pf.request(request)
+        response_json = response.json()
+        print(response_json)
+        self.assertEqual(response.status_code, 200)
+        self.assertIsNotNone(response_json['data'])
 
 
 if __name__ == '__main__':
