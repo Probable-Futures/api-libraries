@@ -1,3 +1,3 @@
-- can I see full API?
-- lon/lat in input, longitude/latitude in response
-- should numeric fields really be str?  
+# Python Library
+
+This python library can be used to configure, prepare and send a request to the Probable Futures's api.

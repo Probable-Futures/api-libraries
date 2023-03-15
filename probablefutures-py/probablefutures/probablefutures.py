@@ -49,12 +49,9 @@ def _get_group(matchobj):
     :param matchobj: the matched dictionary pair string parsed by the regular expression.
     :return:  GraphQL formatted dictionary pair
     """
-    # print(matchobj.group(2))
     if matchobj.group(2) == '':
-        # print('value')
         return matchobj.group(0)
     else:
-        # print('key')
         return matchobj.group(1) + matchobj.group(2)
 
 
@@ -65,7 +62,6 @@ def build_query(input_fields={}, output_fields=[]):
     :param output_fields: array of output fields that the user wants returned.
     :return:  fully formatted GraphQL request.
     """
-    # formatted_input = {key.replace('\'', ''): val for key, val in input_fields.items()}
     input_fields = re.sub("'(.*?)'(:?)", _get_group, str(input_fields))
     input_fields = input_fields.replace("'", "\"")
     return QUERY_TEMPLATE.format(input_fields=input_fields, output_fields='\n\t'.join(output_fields))
